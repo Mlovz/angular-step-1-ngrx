@@ -1,0 +1,22 @@
+<div class="users">
+  @if(userError$ | async){
+  <h1 style="color: red">{{ userError$ | async }}</h1>
+  }@else{
+
+  <button mat-fab (click)="onOpenDialog()">+</button>
+
+  <div class="users-list">
+    @if(users$ | async; as users){ @for(user of users$ | async; track user) {
+    <app-user-card [user]="user" (deleteUser)="onDelete(user)" />
+    } }
+  </div>
+  }
+</div>
+
+<div class="">
+  @if (isLoading$ | async) {
+  <div class="loading">
+    <mat-spinner></mat-spinner>
+  </div>
+  }
+</div>
